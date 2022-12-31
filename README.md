@@ -40,6 +40,16 @@ https://streamable.com/3v5d5h
 
 - exports['ps-dispatch']:OfficerDown()
 
+- exports['ps-dispatch']:OfficerDown2()
+
+- exports['ps-dispatch']:pdpanic()
+
+- exports['ps-dispatch']:EmsDown()
+
+- exports['ps-dispatch']:EmsDown2()
+
+- exports['ps-dispatch']:emspanic()
+
 - exports['ps-dispatch']:SpeedingVehicle(vehicle)
 
 - exports['ps-dispatch']:Fight()
@@ -89,4 +99,5 @@ https://streamable.com/3v5d5h
 - exports['ps-dispatch']:SuspiciousActivity()
 
 - exports['ps-dispatch']:SignRobbery()
+
 ```
