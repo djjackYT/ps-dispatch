@@ -236,7 +236,7 @@ end)
 RegisterNetEvent("ps-dispatch:client:AddCallBlip", function(coords, data, blipId)
 	if IsValidJob(data.recipientList) and CheckOnDuty() then
 		PlaySound(-1, data.sound, data.sound2, 0, 0, 1)
-		TriggerServerEvent("InteractSound_SV:PlayOnSource", data.sound, 0.25) -- For Custom Sounds
+		TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 0.45, data.sound, 0.25) -- For Custom Sounds
 		CreateThread(function()
 			local alpha = 255
 			local blip = nil
