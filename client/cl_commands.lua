@@ -3,7 +3,6 @@ local playAnim = false
 local phoneProp = 0
 local phoneModel = Config.PhoneModel
 
-
 -- Item checks to return whether or not the client has a phone or not
 local function HasPhone()
     return QBCore.Functions.HasItem("phone")
@@ -91,6 +90,17 @@ RegisterCommand('911', function(source, args, rawCommand)
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                if Config.ChatMessages then
+                    TriggerEvent('chat:addMessage', {
+                    color = { 255, 0, 0},
+                    multiline = true,
+                    templateId = "911chat",
+                    args = { "911 | " .. plyData.charinfo.firstname .. "  " .. plyData.charinfo.lastname .. " #" .. plyData.charinfo.phone, rawCommand:sub(5)}
+                    })
+                    PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset", 0, 0, 1)
+                else
+                    DeletePhone()
+                end
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -133,6 +143,17 @@ RegisterCommand('911a', function(source, args, rawCommand)
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                if Config.ChatMessages then
+                    TriggerEvent('chat:addMessage', {
+                        color = { 255, 0, 0},
+                        multiline = true,
+                        templateId = "911chat",
+                        args = { "911 Anonymous |", rawCommand:sub(5)}
+                    })
+                    PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset", 0, 0, 1)
+                else 
+                    DeletePhone()
+                end
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -157,25 +178,20 @@ RegisterCommand('311', function(source, args, rawCommand)
                 local currentPos = GetEntityCoords(PlayerPedId())
                 local locationInfo = getStreetandZone(currentPos)
                 local gender = GetPedGender()
-                TriggerServerEvent("dispatch:server:notify",{
-                    dispatchcodename = "311call", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-                    dispatchCode = "311",
-                    firstStreet = locationInfo,
-                    priority = 2, -- priority
-                    name = plyData.charinfo.firstname:sub(1,1):upper()..plyData.charinfo.firstname:sub(2).. " ".. plyData.charinfo.lastname:sub(1,1):upper()..plyData.charinfo.lastname:sub(2),
-                    number = plyData.charinfo.phone,
-                    origin = {
-                        x = currentPos.x,
-                        y = currentPos.y,
-                        z = currentPos.z
-                    },
-                    dispatchMessage = "Incoming Call", -- message
-                    information = msg,
-                    job = {"police", "ambulance"} -- jobs that will get the alerts
-                })
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                if Config.ChatMessages then
+                    TriggerEvent('chat:addMessage', {
+                        color = { 255, 0, 0},
+                        multiline = true,
+                        templateId = "311chat",
+                        args = { "311 | " .. plyData.charinfo.firstname .. "  " .. plyData.charinfo.lastname .. " #" .. plyData.charinfo.phone, rawCommand:sub(5)}
+                    })
+                    PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset", 0, 0, 1)
+                else
+                    DeletePhone()
+                end
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -200,25 +216,20 @@ RegisterCommand('311a', function(source, args, rawCommand)
                 local currentPos = GetEntityCoords(PlayerPedId())
                 local locationInfo = getStreetandZone(currentPos)
                 local gender = GetPedGender()
-                TriggerServerEvent("dispatch:server:notify",{
-                    dispatchcodename = "311call", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
-                    dispatchCode = "311",
-                    firstStreet = locationInfo,
-                    priority = 2, -- priority
-                    name = "Anonymous",
-                    number = "Hidden Number",
-                    origin = {
-                        x = currentPos.x,
-                        y = currentPos.y,
-                        z = currentPos.z
-                    },
-                    dispatchMessage = "Incoming Call", -- message
-                    information = msg,
-                    job = {"police", "ambulance"} -- jobs that will get the alerts
-                })
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                if Config.ChatMessages then
+                    TriggerEvent('chat:addMessage', {
+                        color = { 255, 0, 0},
+                        multiline = true,
+                        templateId = "311chat",
+                        args = { "311 Anonymous |", rawCommand:sub(5)}
+                    })
+                    PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset", 0, 0, 1)
+                else
+                    DeletePhone()
+                end
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -234,6 +245,7 @@ end)
 Citizen.CreateThread(function()
     TriggerEvent('chat:addSuggestion', '/911', 'Send a message to the police.', {{ name="message", help="Message to police."}})
     TriggerEvent('chat:addSuggestion', '/911a', 'Send a message to the police anonymously.', {{ name="message", help="Message to police anonymous."}})
-    TriggerEvent('chat:addSuggestion', '/311', 'Send a message to the EMS.', {{ name="message", help="Message to EMS."}})
-    TriggerEvent('chat:addSuggestion', '/311a', 'Send a message to the EMS anonymously.', {{ name="message", help="Message to EMS anonymous."}})
+    TriggerEvent('chat:addSuggestion', '/311', 'Send a non urgent message to the Police.', {{ name="message", help="Message to EMS."}})
+    TriggerEvent('chat:addSuggestion', '/311a', 'Send a message non urgent to the Police anonymously.', {{ name="message", help="Message to EMS anonymous."}})
+
 end)
