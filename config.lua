@@ -34,6 +34,9 @@ Config.Debug = true
 Config.MinOffset = 1
 Config.MaxOffset = 120
 ---------------------------------------------------------------
+Config.ChatMessages = true
+
+---------------------------------------------------------------
 
 Citizen.CreateThread(function()
     -- if not GetPlayerPed(-1) then return end
