@@ -2,8 +2,9 @@
 QBCore Dispatch (Nopixel Inspired) 
 
 # Dependencies
+- chat: https://github.com/djjackYT/chat
 
-- ps-mdt [Optional]
+- ps-mdt: https://github.com/Project-Sloth/ps-mdt [Optional]
 
 # Installation
 ```Step 1``` Download ZIP
