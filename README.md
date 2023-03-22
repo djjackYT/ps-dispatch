@@ -2,7 +2,7 @@
 QBCore Dispatch (Nopixel Inspired) 
 
 # Dependencies
-- chat: https://github.com/djjackYT/chat
+- chat: https://github.com/djjackYT/chat [if Config.ChatMessage = true]
 
 - ps-mdt: https://github.com/Project-Sloth/ps-mdt [Optional]
 
