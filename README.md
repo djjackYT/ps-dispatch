@@ -28,9 +28,7 @@ https://streamable.com/3v5d5h
 
 # To-do
 
-* Delete 311 alerts
-
-* Add 311/911 to chat messages
+* Make messages appear for officers
 
 # Alert Exports.
 
